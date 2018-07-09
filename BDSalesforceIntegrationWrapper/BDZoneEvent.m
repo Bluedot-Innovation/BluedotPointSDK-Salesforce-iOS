@@ -49,9 +49,9 @@ static id ObjectOrNull(id object)
     return [NSDictionary dictionaryWithObjectsAndKeys:
             self.salesforceSubscriberKey,@"subscriberKey",
             self.apiKey,@"apiKey",
-            self.packageName ,@"packageName",
-            self.userName,@"userName",
             self.zoneId,@"zoneId",
+            ObjectOrNull(self.packageName) ,@"packageName",
+            ObjectOrNull(self.userName),@"userName",
             ObjectOrNull(self.zoneName),@"zoneName",
             ObjectOrNull(self.fenceId),@"fenceId",
             ObjectOrNull(self.fenceName),@"fenceName",

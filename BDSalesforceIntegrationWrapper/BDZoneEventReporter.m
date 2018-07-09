@@ -129,8 +129,6 @@ static NSString *urlString = @"https://api.bluedotinnovation.com/1/salesforce/ev
     if ( zoneEvent.salesforceSubscriberKey == nil )   [NSException raise:NSInvalidArgumentException format:@"Salesforce subscriber key cannot be empty."];
     if ( zoneEvent.zoneId == nil )                    [NSException raise:NSInvalidArgumentException format:@"Zone ID cannot be empty."];
     if ( zoneEvent.apiKey == nil )                    [NSException raise:NSInvalidArgumentException format:@"API key cannot be empty"];
-    if ( zoneEvent.packageName == nil )               [NSException raise:NSInvalidArgumentException format:@"Package name cannot be empty."];
-    if ( zoneEvent.userName == nil )                  [NSException raise:NSInvalidArgumentException format:@"Username cannot be empty."];
 
 
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
