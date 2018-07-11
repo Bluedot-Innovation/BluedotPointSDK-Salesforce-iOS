@@ -4,3 +4,12 @@
 *.DS_Store
 .DS_Store
 xcuserdata/
+
+## fastlane
+.bundle
+vendor
+build
+builds
+
+## Output framework
+Output

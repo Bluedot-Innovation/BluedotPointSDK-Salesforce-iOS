@@ -1,0 +1,8 @@
+lane :framework do
+    xcodebuild(
+      project: "BDSalesforceIntegrationWrapper.xcodeproj",
+      scheme: "BDSalesforceIntegrationPackage",
+      configuration: "Release",
+      xcargs: 'SYMROOT="./build"'
+    )
+end
