@@ -6,21 +6,6 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		9A3BF2171D6C0C65005C7458 /* BDSalesforceIntegrationPackage */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 9A3BF2181D6C0C65005C7458 /* Build configuration list for PBXAggregateTarget "BDSalesforceIntegrationPackage" */;
-			buildPhases = (
-				9A3BF25D1D6C2636005C7458 /* Build Framework */,
-			);
-			dependencies = (
-				9A3BF21C1D6C0C6E005C7458 /* PBXTargetDependency */,
-			);
-			name = BDSalesforceIntegrationPackage;
-			productName = BDSalesforceIntegration;
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
 		4D325AD11F04C6490097BBAC /* BDZoneEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D325AD01F04C6490097BBAC /* BDZoneEvent.m */; };
 		4D325AD21F04CCCE0097BBAC /* BDZoneEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D325ACF1F04A8100097BBAC /* BDZoneEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -28,17 +13,12 @@
 		9AC850531D6BC56200217E69 /* BDZoneEventReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC8504A1D6BC56200217E69 /* BDZoneEventReporter.m */; };
 		9AC850561D6BC56200217E69 /* BDPZoneEventReporterDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC8504D1D6BC56200217E69 /* BDPZoneEventReporterDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9AC850911D6BE49700217E69 /* BDSalesforceIntegrationWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC850901D6BE49700217E69 /* BDSalesforceIntegrationWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E1AB4C74211C052D00ED8994 /* BDPIntegrationManagerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = E1AB4C6F211C052D00ED8994 /* BDPIntegrationManagerDelegate.h */; };
+		E1AB4C75211C052D00ED8994 /* BDAuthenticateData.h in Headers */ = {isa = PBXBuildFile; fileRef = E1AB4C70211C052D00ED8994 /* BDAuthenticateData.h */; };
+		E1AB4C76211C052D00ED8994 /* BDIntegrationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E1AB4C71211C052D00ED8994 /* BDIntegrationManager.h */; };
+		E1AB4C77211C052D00ED8994 /* BDAuthenticateData.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AB4C72211C052D00ED8994 /* BDAuthenticateData.m */; };
+		E1AB4C78211C052D00ED8994 /* BDIntegrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AB4C73211C052D00ED8994 /* BDIntegrationManager.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		9A3BF21B1D6C0C6E005C7458 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9AC850321D6BC4D800217E69 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9AC8503A1D6BC4D800217E69;
-			remoteInfo = BDSalesforceIntegrationWrapper;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		4D325ACF1F04A8100097BBAC /* BDZoneEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDZoneEvent.h; sourceTree = "<group>"; };
@@ -49,6 +29,11 @@
 		9AC8504A1D6BC56200217E69 /* BDZoneEventReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDZoneEventReporter.m; sourceTree = "<group>"; };
 		9AC8504D1D6BC56200217E69 /* BDPZoneEventReporterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDPZoneEventReporterDelegate.h; sourceTree = "<group>"; };
 		9AC850901D6BE49700217E69 /* BDSalesforceIntegrationWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSalesforceIntegrationWrapper.h; sourceTree = "<group>"; };
+		E1AB4C6F211C052D00ED8994 /* BDPIntegrationManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDPIntegrationManagerDelegate.h; sourceTree = "<group>"; };
+		E1AB4C70211C052D00ED8994 /* BDAuthenticateData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDAuthenticateData.h; sourceTree = "<group>"; };
+		E1AB4C71211C052D00ED8994 /* BDIntegrationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDIntegrationManager.h; sourceTree = "<group>"; };
+		E1AB4C72211C052D00ED8994 /* BDAuthenticateData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDAuthenticateData.m; sourceTree = "<group>"; };
+		E1AB4C73211C052D00ED8994 /* BDIntegrationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDIntegrationManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +66,11 @@
 		9AC8503D1D6BC4D800217E69 /* BDSalesforceIntegrationWrapper */ = {
 			isa = PBXGroup;
 			children = (
+				E1AB4C70211C052D00ED8994 /* BDAuthenticateData.h */,
+				E1AB4C72211C052D00ED8994 /* BDAuthenticateData.m */,
+				E1AB4C71211C052D00ED8994 /* BDIntegrationManager.h */,
+				E1AB4C73211C052D00ED8994 /* BDIntegrationManager.m */,
+				E1AB4C6F211C052D00ED8994 /* BDPIntegrationManagerDelegate.h */,
 				9AC850901D6BE49700217E69 /* BDSalesforceIntegrationWrapper.h */,
 				9AC850491D6BC56200217E69 /* BDZoneEventReporter.h */,
 				9AC8504A1D6BC56200217E69 /* BDZoneEventReporter.m */,
@@ -100,9 +90,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D325AD21F04CCCE0097BBAC /* BDZoneEvent.h in Headers */,
+				E1AB4C75211C052D00ED8994 /* BDAuthenticateData.h in Headers */,
 				9AC850911D6BE49700217E69 /* BDSalesforceIntegrationWrapper.h in Headers */,
+				E1AB4C74211C052D00ED8994 /* BDPIntegrationManagerDelegate.h in Headers */,
 				9AC850521D6BC56200217E69 /* BDZoneEventReporter.h in Headers */,
 				9AC850561D6BC56200217E69 /* BDPZoneEventReporterDelegate.h in Headers */,
+				E1AB4C76211C052D00ED8994 /* BDIntegrationManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,9 +129,6 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Bluedot Innovation";
 				TargetAttributes = {
-					9A3BF2171D6C0C65005C7458 = {
-						CreatedOnToolsVersion = 7.3.1;
-					};
 					9AC8503A1D6BC4D800217E69 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
@@ -157,7 +147,6 @@
 			projectRoot = "";
 			targets = (
 				9AC8503A1D6BC4D800217E69 /* BDSalesforceIntegrationWrapper */,
-				9A3BF2171D6C0C65005C7458 /* BDSalesforceIntegrationPackage */,
 			);
 		};
 /* End PBXProject section */
@@ -172,23 +161,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		9A3BF25D1D6C2636005C7458 /* Build Framework */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Build Framework";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "${PROJECT_DIR}/BuildScripts/BDSalesforceIntegrationBuild.sh\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		9AC850361D6BC4D800217E69 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -196,38 +168,14 @@
 			files = (
 				4D325AD11F04C6490097BBAC /* BDZoneEvent.m in Sources */,
 				9AC850531D6BC56200217E69 /* BDZoneEventReporter.m in Sources */,
+				E1AB4C78211C052D00ED8994 /* BDIntegrationManager.m in Sources */,
+				E1AB4C77211C052D00ED8994 /* BDAuthenticateData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		9A3BF21C1D6C0C6E005C7458 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9AC8503A1D6BC4D800217E69 /* BDSalesforceIntegrationWrapper */;
-			targetProxy = 9A3BF21B1D6C0C6E005C7458 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		9A3BF2191D6C0C65005C7458 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		9A3BF21A1D6C0C65005C7458 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 		9AC850411D6BC4D800217E69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -364,15 +312,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9A3BF2181D6C0C65005C7458 /* Build configuration list for PBXAggregateTarget "BDSalesforceIntegrationPackage" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9A3BF2191D6C0C65005C7458 /* Debug */,
-				9A3BF21A1D6C0C65005C7458 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		9AC850351D6BC4D800217E69 /* Build configuration list for PBXProject "BDSalesforceIntegrationWrapper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
