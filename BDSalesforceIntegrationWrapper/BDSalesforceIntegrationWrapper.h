@@ -16,5 +16,6 @@ FOUNDATION_EXPORT const unsigned char BDSalesforceIntegrationWrapperVersionStrin
 
 // In this header, you should import all the public headers of your framework using statements like #import <BDSalesforceIntegrationWrapper/PublicHeader.h>
 
+#import <BDSalesforceIntegrationWrapper/BDZoneEvent.h>
 #import <BDSalesforceIntegrationWrapper/BDZoneEventReporter.h>
 #import <BDSalesforceIntegrationWrapper/BDPZoneEventReporterDelegate.h>
