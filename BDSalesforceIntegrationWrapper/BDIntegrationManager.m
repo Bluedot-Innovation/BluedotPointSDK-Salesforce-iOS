@@ -6,15 +6,15 @@
 //  Copyright © 2016 Bluedot Innovation. All rights reserved.
 //
 
-#import <BDPointSDK/BDPointSDK.h>
+@import BDPointSDK;
 #import <Foundation/Foundation.h>
 #import "BDZoneEventReporter.h"
 #import "BDIntegrationManager.h"
 #import "BDAuthenticateData.h"
-#import "ETPush.h"
+#import <MarketingCloudSDK/MarketingCloudSDK.h>
 
 
-static NSString *subscriberKeyUserDefaultsKey = @"SubcriberKeyUserDefaultsKey";
+static NSString *contactKeyUserDefaultsKey = @"SubcriberKeyUserDefaultsKey";
 
 @interface BDIntegrationManager () <BDPointDelegate>
 
@@ -59,50 +59,41 @@ static NSString *subscriberKeyUserDefaultsKey = @"SubcriberKeyUserDefaultsKey";
     _authenticateData = BDAuthenticateData.authenticateData;
 }
 
-- (void)authenticateETPush
+- (void)authenticateMarketingCloudSDK
 {
     BOOL successful = NO;
     NSError *error = nil;
-    
-    successful = [[ ETPush pushManager ] configureSDKWithAppID:_authenticateData.etAppID
-                                                andAccessToken:_authenticateData.etAccessToken
-                                                 withAnalytics:NO
-                                           andLocationServices:NO
-                                          andProximityServices:NO
-                                                 andCloudPages:NO
-                                               withPIAnalytics:NO
-                                                         error:&error];
-    
+
+    successful = [[MarketingCloudSDK sharedInstance] sfmc_configure:&error];
+
     if ( successful == NO )
     {
-        if ( [ _delegate respondsToSelector:@selector(configureETPushFailedWithError:) ] )
-            [ _delegate configureETPushFailedWithError:error ];
+        if ( [ _delegate respondsToSelector:@selector(configureMarketingCloudSDKFailedWithError:) ] )
+            [ _delegate configureMarketingCloudSDKFailedWithError:error ];
     }
     else
     {
-        if ( [ _delegate respondsToSelector:@selector(configureETPushSuccessful) ] )
-            [ _delegate configureETPushSuccessful ];
-        
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        NSString * etPushSubscriberKey = [[ETPush pushManager] getSubscriberKey];
-        NSString * userDefaultSubscriberKey =  [userDefaults stringForKey:subscriberKeyUserDefaultsKey];
-        NSString * subscriberKey = etPushSubscriberKey ?: userDefaultSubscriberKey;
-        
-        if ( subscriberKey == nil )
-        {
-            subscriberKey = [NSUUID UUID].UUIDString;
-            [[ETPush pushManager] setSubscriberKey:subscriberKey];
-            [userDefaults setValue:subscriberKey forKey:subscriberKeyUserDefaultsKey];
-            [[ETPush pushManager] updateET];
-        }
-        
-        if (etPushSubscriberKey == nil && userDefaultSubscriberKey != nil) {
+        if ( [ _delegate respondsToSelector:@selector(configureMarketingCloudSDKSuccessful) ] )
+            [ _delegate configureMarketingCloudSDKSuccessful ];
 
-            [[ETPush pushManager] setSubscriberKey:userDefaultSubscriberKey];
-            [[ETPush pushManager] updateET];
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSString * sfmcContactKey = [[MarketingCloudSDK sharedInstance] sfmc_contactKey];
+        NSString * userDefaultContactKey =  [userDefaults stringForKey:contactKeyUserDefaultsKey];
+        NSString * contactKey = sfmcContactKey ?: userDefaultContactKey;
+
+        if ( contactKey == nil )
+        {
+            contactKey = [NSUUID UUID].UUIDString;
+            [[MarketingCloudSDK sharedInstance] sfmc_setContactKey:contactKey];
+            [userDefaults setValue:contactKey forKey:contactKeyUserDefaultsKey];
         }
-        
-        NSLog(@"SubscriberKey: %@", [userDefaults stringForKey:subscriberKeyUserDefaultsKey]);
+
+        if (sfmcContactKey == nil && userDefaultContactKey != nil) {
+            BOOL ret = [[MarketingCloudSDK sharedInstance] sfmc_setContactKey:contactKey];
+            if (ret == false) [NSException raise:NSInvalidArgumentException format:@"Salesforce subscriber key cannot be empty."];
+        }
+
+        NSLog(@"SubscriberKey: %@", [userDefaults stringForKey:contactKeyUserDefaultsKey]);
     }
 }
 
@@ -134,7 +125,7 @@ static NSString *subscriberKeyUserDefaultsKey = @"SubcriberKeyUserDefaultsKey";
     BDAuthenticateData *authenticateData = BDAuthenticateData.authenticateData;
     
     BDZoneEvent *zoneEvent = [BDZoneEvent build:^(id<BDZoneEventBuilder> builder) {
-        [builder setSalesforceSubscriberKey:[[ETPush pushManager] getSubscriberKey]];
+        [builder setSalesforceSubscriberKey:[[MarketingCloudSDK sharedInstance] sfmc_contactKey]];
         [builder setApiKey:authenticateData.pointApiKey];
         [builder setZoneId:zoneInfo.ID];
         [builder setZoneName:zoneInfo.name];
@@ -161,7 +152,7 @@ static NSString *subscriberKeyUserDefaultsKey = @"SubcriberKeyUserDefaultsKey";
     BDAuthenticateData *authenticateData = BDAuthenticateData.authenticateData;
     
     BDZoneEvent *zoneEvent = [BDZoneEvent build:^(id<BDZoneEventBuilder> builder) {
-        [builder setSalesforceSubscriberKey:[[ETPush pushManager] getSubscriberKey]];
+        [builder setSalesforceSubscriberKey:[[MarketingCloudSDK sharedInstance] sfmc_contactKey]];
         [builder setApiKey:authenticateData.pointApiKey];
         [builder setZoneId:zoneInfo.ID];
         [builder setZoneName:zoneInfo.name];
@@ -187,7 +178,7 @@ static NSString *subscriberKeyUserDefaultsKey = @"SubcriberKeyUserDefaultsKey";
     BDAuthenticateData *authenticateData = BDAuthenticateData.authenticateData;
     
     BDZoneEvent *zoneEvent = [BDZoneEvent build:^(id<BDZoneEventBuilder> builder) {
-        [builder setSalesforceSubscriberKey:[[ETPush pushManager] getSubscriberKey]];
+        [builder setSalesforceSubscriberKey:[[MarketingCloudSDK sharedInstance] sfmc_contactKey]];
         [builder setApiKey:authenticateData.pointApiKey];
         [builder setZoneId:zoneInfo.ID];
         [builder setZoneName:zoneInfo.name];
@@ -211,7 +202,7 @@ static NSString *subscriberKeyUserDefaultsKey = @"SubcriberKeyUserDefaultsKey";
     BDAuthenticateData *authenticateData = BDAuthenticateData.authenticateData;
     
     BDZoneEvent *zoneEvent = [BDZoneEvent build:^(id<BDZoneEventBuilder> builder) {
-        [builder setSalesforceSubscriberKey:[[ETPush pushManager] getSubscriberKey]];
+        [builder setSalesforceSubscriberKey:[[MarketingCloudSDK sharedInstance] sfmc_contactKey]];
         [builder setApiKey:authenticateData.pointApiKey];
         [builder setZoneId:zoneInfo.ID];
         [builder setZoneName:zoneInfo.name];

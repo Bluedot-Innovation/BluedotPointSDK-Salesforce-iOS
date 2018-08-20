@@ -10,11 +10,7 @@
 #import "BDZoneEventReporter.h"
 #import "BDZoneEvent.h"
 
-#ifdef DEBUG
-static NSString *urlString = @"https://publicapi.dev-bluedot.com/1/salesforce/event";
-#else
 static NSString *urlString = @"https://api.bluedotinnovation.com/1/salesforce/event";
-#endif
 
 @interface BDZoneEventReporter()
 
