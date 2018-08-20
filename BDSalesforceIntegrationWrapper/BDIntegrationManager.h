@@ -15,7 +15,7 @@
 
 + (instancetype)instance;
 
-- (void)authenticateETPush;
+- (void)authenticateMarketingCloudSDK;
 
 - (void)authenticateBDPoint;
 

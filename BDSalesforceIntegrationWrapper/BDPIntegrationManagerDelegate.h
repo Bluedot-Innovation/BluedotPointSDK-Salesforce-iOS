@@ -9,13 +9,13 @@
 
 @protocol BDPIntegrationManagerDelegate <NSObject>
 
-- (void)configureETPushSuccessful;
+- (void)configureMarketingCloudSDKSuccessful;
 
 - (void)authenticatePointSDKSuccessful;
 
 @optional
 
-- (void)configureETPushFailedWithError: (NSError *)error;
+- (void)configureMarketingCloudSDKFailedWithError: (NSError *)error;
 
 - (void)authenticatePointSDKFailedWithError: (NSError *)error;
 
