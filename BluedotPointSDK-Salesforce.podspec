@@ -11,6 +11,6 @@ Pod::Spec.new do |s|
   s.source_files  = "BDSalesforceIntegrationWrapper"
   s.header_dir = "BluedotPointSDK-Salesforce"
   s.requires_arc = true
-  s.dependency "BluedotPointSDK", '~> 1.13'
+  s.dependency "BluedotPointSDK", '~> 1.13.0'
   s.dependency "MarketingCloudSDK", '~> 5.2.0'
 end
