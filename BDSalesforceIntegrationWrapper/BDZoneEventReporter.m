@@ -24,7 +24,7 @@ static NSString *urlString = @"https://api.bluedotinnovation.com/1/salesforce/ev
 {
     static BDZoneEventReporter  *shareInstance = nil;
     static dispatch_once_t   dispatchOncePredicate  = 0;
-
+    
     dispatch_block_t singletonInit = ^
     {
         dispatch_block_t mainInit = ^
@@ -32,7 +32,7 @@ static NSString *urlString = @"https://api.bluedotinnovation.com/1/salesforce/ev
             shareInstance = [ [ BDZoneEventReporter alloc ] init ];
             shareInstance.urlSession = [ self urlSession ];
         };
-
+        
         if( NSThread.currentThread.isMainThread )
         {
             mainInit();
@@ -42,9 +42,9 @@ static NSString *urlString = @"https://api.bluedotinnovation.com/1/salesforce/ev
             dispatch_sync( dispatch_get_main_queue(), mainInit );
         }
     };
-
+    
     dispatch_once( &dispatchOncePredicate, singletonInit );
-
+    
     return( shareInstance );
 }
 
@@ -53,14 +53,14 @@ static NSString *urlString = @"https://api.bluedotinnovation.com/1/salesforce/ev
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSOperationQueue *webServiceQueue = [ [ NSOperationQueue alloc ] init ];
     webServiceQueue.name = @"Salesforce Integration Queue";
-
+    
     return [NSURLSession sessionWithConfiguration:configuration delegate:nil delegateQueue:webServiceQueue];
 }
 
 - (void)reportCheckInWithBDZoneEvent:(BDZoneEvent *) zoneEvent
 {
     NSURLRequest *request = [self urlRequestFromSalesforceSubscriberKey:(BDZoneEvent *)zoneEvent];
-
+    
     [self postToIntegrationServerWithRequest:request];
 }
 
@@ -68,7 +68,7 @@ static NSString *urlString = @"https://api.bluedotinnovation.com/1/salesforce/ev
 {
     NSURLRequest *request = [self urlRequestFromSalesforceSubscriberKey:(BDZoneEvent *)zoneEvent
                                                         checkOutEnabled:YES];
-
+    
     [self postToIntegrationServerWithRequest:request];
 }
 
@@ -77,9 +77,9 @@ static NSString *urlString = @"https://api.bluedotinnovation.com/1/salesforce/ev
     NSURLSessionTask *task = [_urlSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         NSInteger statusCode = httpResponse.statusCode;
-
+        
         BOOL isOK = statusCode >= 200 && statusCode < 300;
-
+        
         if ( isOK )
         {
             if ( [ _delegate respondsToSelector:@selector(reportSuccessful) ] )
@@ -95,12 +95,12 @@ static NSString *urlString = @"https://api.bluedotinnovation.com/1/salesforce/ev
                                           JSONObjectWithData:data
                                           options:NSJSONReadingMutableLeaves
                                           error:nil];
-
+            
             NSString *errorMessage = jsonResponse[@"error"] ?: [NSHTTPURLResponse localizedStringForStatusCode:statusCode];
             NSError *responseError = error ?: [NSError errorWithDomain:NSNetServicesErrorDomain
                                                                   code:statusCode
                                                               userInfo:@{NSLocalizedDescriptionKey:errorMessage}];
-
+            
             if ( responseError && [ _delegate respondsToSelector:@selector(reportFailedWithError:) ] )
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -109,7 +109,7 @@ static NSString *urlString = @"https://api.bluedotinnovation.com/1/salesforce/ev
             }
         }
     }];
-
+    
     [task resume];
 }
 
@@ -120,31 +120,31 @@ static NSString *urlString = @"https://api.bluedotinnovation.com/1/salesforce/ev
 }
 
 - (NSURLRequest *)urlRequestFromSalesforceSubscriberKey:(BDZoneEvent *) zoneEvent
-                                               checkOutEnabled:(BOOL) checkOutEnabled
+                                        checkOutEnabled:(BOOL) checkOutEnabled
 {
     if ( zoneEvent.salesforceSubscriberKey == nil )   [NSException raise:NSInvalidArgumentException format:@"Salesforce subscriber key cannot be empty."];
     if ( zoneEvent.zoneId == nil )                    [NSException raise:NSInvalidArgumentException format:@"Zone ID cannot be empty."];
     if ( zoneEvent.apiKey == nil )                    [NSException raise:NSInvalidArgumentException format:@"API key cannot be empty"];
-
-
+    
+    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.HTTPMethod = @"POST";
     request.allowsCellularAccess = YES;
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-
+    
     NSMutableDictionary *data = [[zoneEvent dictionary] mutableCopy];
-
+    
     if ( checkOutEnabled )
     {
         [data setValue:@YES forKey:@"checkout"];
     }
-
+    
 #ifdef DEBUG
     NSLog(@"Sending to %@ with data: %@", urlString, data);
 #endif
-
+    
     request.HTTPBody = [NSJSONSerialization dataWithJSONObject:data options:0 error:nil];
-
+    
     return request;
 }
 

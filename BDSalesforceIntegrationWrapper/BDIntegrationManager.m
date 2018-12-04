@@ -57,42 +57,47 @@ static NSString *contactKeyUserDefaultsKey = @"SubcriberKeyUserDefaultsKey";
     BDLocationManager.instance.sessionDelegate = self;
     BDLocationManager.instance.locationDelegate = self;
     _authenticateData = BDAuthenticateData.authenticateData;
+    
+    _salesforceAuthenticationStatus = AuthenticationStatusNotAuthenticated;
+    _pointSDKAuthenticationStatus = AuthenticationStatusNotAuthenticated;
 }
 
 - (void)authenticateMarketingCloudSDK
 {
     BOOL successful = NO;
     NSError *error = nil;
-
+    
     successful = [[MarketingCloudSDK sharedInstance] sfmc_configure:&error];
-
+    
     if ( successful == NO )
     {
+        _salesforceAuthenticationStatus = AuthenticationStatusFailed;
         if ( [ _delegate respondsToSelector:@selector(configureMarketingCloudSDKFailedWithError:) ] )
             [ _delegate configureMarketingCloudSDKFailedWithError:error ];
     }
     else
     {
+        _salesforceAuthenticationStatus = AuthenticationStatusAuthenticated;
         if ( [ _delegate respondsToSelector:@selector(configureMarketingCloudSDKSuccessful) ] )
             [ _delegate configureMarketingCloudSDKSuccessful ];
-
+        
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSString * sfmcContactKey = [[MarketingCloudSDK sharedInstance] sfmc_contactKey];
         NSString * userDefaultContactKey =  [userDefaults stringForKey:contactKeyUserDefaultsKey];
         NSString * contactKey = sfmcContactKey ?: userDefaultContactKey;
-
+        
         if ( contactKey == nil )
         {
             contactKey = [NSUUID UUID].UUIDString;
             [[MarketingCloudSDK sharedInstance] sfmc_setContactKey:contactKey];
             [userDefaults setValue:contactKey forKey:contactKeyUserDefaultsKey];
         }
-
+        
         if (sfmcContactKey == nil && userDefaultContactKey != nil) {
             BOOL ret = [[MarketingCloudSDK sharedInstance] sfmc_setContactKey:contactKey];
             if (ret == false) [NSException raise:NSInvalidArgumentException format:@"Salesforce subscriber key cannot be empty."];
         }
-
+        
         NSLog(@"SubscriberKey: %@", [userDefaults stringForKey:contactKeyUserDefaultsKey]);
     }
 }
@@ -118,7 +123,7 @@ static NSString *contactKeyUserDefaultsKey = @"SubcriberKeyUserDefaultsKey";
 
 - (void)didCheckIntoFence:(BDFenceInfo *)fence
                    inZone:(BDZoneInfo *)zoneInfo
-              atLocation: (BDLocationInfo *)location
+               atLocation: (BDLocationInfo *)location
              willCheckOut:(BOOL)willCheckOut
            withCustomData:(NSDictionary *)customData
 {
@@ -219,12 +224,14 @@ static NSString *contactKeyUserDefaultsKey = @"SubcriberKeyUserDefaultsKey";
 
 - (void)authenticationWasSuccessful
 {
+    _pointSDKAuthenticationStatus = AuthenticationStatusAuthenticated;
     if ( _delegate && [ _delegate respondsToSelector:@selector(authenticatePointSDKSuccessful) ] )
         [ _delegate authenticatePointSDKSuccessful ];
 }
 
 - (void)authenticationWasDeniedWithReason: (NSString *)reason
 {
+    _pointSDKAuthenticationStatus = AuthenticationStatusFailed;
     if ( _delegate && [ _delegate respondsToSelector:@selector(authenticatePointSDKFailedWithError:) ] ) {
         NSError *error = [ NSError errorWithDomain:NSStringFromClass(self.class)
                                               code:kCFSOCKS4ErrorRequestFailed
@@ -235,22 +242,23 @@ static NSString *contactKeyUserDefaultsKey = @"SubcriberKeyUserDefaultsKey";
 
 - (void)authenticationFailedWithError: (NSError *)error
 {
+    _pointSDKAuthenticationStatus = AuthenticationStatusFailed;
     if ( _delegate && [ _delegate respondsToSelector:@selector(authenticatePointSDKFailedWithError:) ] )
         [ _delegate authenticatePointSDKFailedWithError:error ];
 }
 
 - (void)didEndSession
 {
+    _pointSDKAuthenticationStatus = AuthenticationStatusNotAuthenticated;
 }
 
 - (void)didEndSessionWithError: (NSError *)error
 {
+    _pointSDKAuthenticationStatus = AuthenticationStatusNotAuthenticated;
 }
 
 - (void)willAuthenticateWithApiKey:(NSString *)apiKey {
     
 }
-
-
 
 @end

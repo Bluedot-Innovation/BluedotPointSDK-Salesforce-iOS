@@ -9,9 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "BDPIntegrationManagerDelegate.h"
 
+typedef enum : NSUInteger {
+    AuthenticationStatusNotAuthenticated,
+    AuthenticationStatusAuthenticated,
+    AuthenticationStatusFailed,
+} AuthenticationStatus;
+
 @interface BDIntegrationManager : NSObject
 
 @property (nonatomic) id<BDPIntegrationManagerDelegate>  delegate;
+@property AuthenticationStatus salesforceAuthenticationStatus;
+@property AuthenticationStatus pointSDKAuthenticationStatus;
 
 + (instancetype)instance;
 
