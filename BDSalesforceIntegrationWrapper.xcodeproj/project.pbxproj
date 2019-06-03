@@ -29,6 +29,7 @@
 		9AC8504A1D6BC56200217E69 /* BDZoneEventReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDZoneEventReporter.m; sourceTree = "<group>"; };
 		9AC8504D1D6BC56200217E69 /* BDPZoneEventReporterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDPZoneEventReporterDelegate.h; sourceTree = "<group>"; };
 		9AC850901D6BE49700217E69 /* BluedotPointSDK-Salesforce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BluedotPointSDK-Salesforce.h"; sourceTree = "<group>"; };
+		E115CFE122A4D02300734C11 /* BDLocationManager+BDPointSDK+Protected.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BDLocationManager+BDPointSDK+Protected.h"; sourceTree = "<group>"; };
 		E1AB4C6F211C052D00ED8994 /* BDPIntegrationManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDPIntegrationManagerDelegate.h; sourceTree = "<group>"; };
 		E1AB4C70211C052D00ED8994 /* BDAuthenticateData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDAuthenticateData.h; sourceTree = "<group>"; };
 		E1AB4C71211C052D00ED8994 /* BDIntegrationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDIntegrationManager.h; sourceTree = "<group>"; };
@@ -78,6 +79,7 @@
 				9AC850401D6BC4D800217E69 /* Info.plist */,
 				4D325ACF1F04A8100097BBAC /* BDZoneEvent.h */,
 				4D325AD01F04C6490097BBAC /* BDZoneEvent.m */,
+				E115CFE122A4D02300734C11 /* BDLocationManager+BDPointSDK+Protected.h */,
 			);
 			path = BDSalesforceIntegrationWrapper;
 			sourceTree = "<group>";
@@ -139,6 +141,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 9AC850311D6BC4D800217E69;

@@ -11,10 +11,12 @@
 #import "BDZoneEventReporter.h"
 #import "BDIntegrationManager.h"
 #import "BDAuthenticateData.h"
+#import "BDLocationManager+BDPointSDK+Protected.h"
 #import <MarketingCloudSDK/MarketingCloudSDK.h>
 
 
 static NSString *contactKeyUserDefaultsKey = @"SubcriberKeyUserDefaultsKey";
+static NSString *pointAPILoginEndPointURL = @"https://globalconfig.dev-bluedot.com/";
 
 @interface BDIntegrationManager () <BDPointDelegate>
 
@@ -104,7 +106,8 @@ static NSString *contactKeyUserDefaultsKey = @"SubcriberKeyUserDefaultsKey";
 
 - (void)authenticateBDPoint
 {
-    [BDLocationManager.instance authenticateWithApiKey:_authenticateData.pointApiKey];
+    [ BDLocationManager.instance authenticateWithApiKey: _authenticateData.pointApiKey
+                                 endpointURL: [NSURL URLWithString:pointAPILoginEndPointURL]];
 }
 
 #pragma mark BDPLocationDelegate
