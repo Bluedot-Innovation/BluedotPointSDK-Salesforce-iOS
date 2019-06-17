@@ -6,7 +6,6 @@
 //  Copyright © 2016 Bluedot Innovation. All rights reserved.
 //
 
-@import BDPointSDK;
 #import <Foundation/Foundation.h>
 #import "BDZoneEventReporter.h"
 #import "BDIntegrationManager.h"
@@ -102,9 +101,9 @@ static NSString *contactKeyUserDefaultsKey = @"SubcriberKeyUserDefaultsKey";
     }
 }
 
-- (void)authenticateBDPoint
+- (void)authenticateBDPointWithAuthorization:(BDAuthorizationLevel)authorization
 {
-    [BDLocationManager.instance authenticateWithApiKey:_authenticateData.pointApiKey];
+    [BDLocationManager.instance authenticateWithApiKey:_authenticateData.pointApiKey requestAuthorization:authorization];
 }
 
 #pragma mark BDPLocationDelegate
