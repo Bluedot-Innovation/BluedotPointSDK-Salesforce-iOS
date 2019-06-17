@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "BluedotPointSDK-Salesforce"
-  s.version      = "1.2.0"
+  s.version      = "1.2.1"
   s.summary      = "Salesforce integration wrapper for Bluedot Point SDK."
   s.homepage     = "https://www.bluedot.io"
   s.license      = { :type => "Copyright", :file => "LICENSE" }

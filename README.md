@@ -8,9 +8,11 @@ This documentation will represent how to implement `PointSDK` and `MarketingClou
 
 Add pod 'BluedotPointSDK-Salesforce', '~> 1.0' similar to the following to your Podfile:
 
-    target 'MyApp' do
-        pod 'BluedotPointSDK-Salesforce', '~> 1.0'
-    end
+```ruby
+target 'MyApp' do
+    pod 'BluedotPointSDK-Salesforce', '~> 1.0'
+end
+```
 
 Then run a `pod install` inside your terminal, or from CocoaPods.app.
 
