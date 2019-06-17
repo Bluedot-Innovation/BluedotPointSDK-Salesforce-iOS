@@ -18,12 +18,15 @@ Add `MarketingCloudSDKConfiguration.json` to your project and configure as per f
 
     [{
     "name": "production",
-    "appid": "<Marketing Cloud appid>",
-    "accesstoken": "<Marketing Cloud accesstoken>",
+    "appid": "__your app id__",
+    "accesstoken": "__your access token__",
+    "marketing_cloud_server_url": "__your app endpoint__",
+    "mid": "__your account mid__",
     "etanalytics": false,
     "pianalytics": false,
     "location": false,
-    "inbox": false
+    "inbox": false,
+    "uselegacypiidentifier": true
     }]
 
 Add MarketingCloudSDKConfiguration.json to Copy Bundle Resources in your target’s Build Phases settings.
@@ -71,7 +74,7 @@ Add `UNUserNotificationCenterDelegate` to the AppDelegate. Implement as shown be
 Implement `BDPZoneEventReporterDelegate` and `BDPIntegrationManagerDelegate` in your application. Then authenticate with Bluedot point access and Marketing Cloud platform:
 
     [BDIntegrationManager.instance authenticateMarketingCloudSDK];
-    [BDIntegrationManager.instance authenticateBDPoint];
+    [BDIntegrationManager.instance authenticateBDPointWithAuthorization:authorizedAlways];
 
 For more details please visit [Bluedot documentation](https://docs.bluedot.io) and [MarketingCloudSDK iOS](https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/get-started/apple.html) and check out our [integration example](https://github.com/Bluedot-Innovation/Salesforce-Simple-Integration-Demo-iOS)
 
