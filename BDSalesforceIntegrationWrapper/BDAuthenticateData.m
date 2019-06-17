@@ -10,24 +10,10 @@
 #import "BDAuthenticateData.h"
 
 static NSString *kBDPointApiKey = @"BDPointApiKey";
-static NSString *kBDPointPackageName = @"BDPointPackageName";
-static NSString *kBDPointUsername = @"BDPointUsername";
-
-// Uncomment to test in Debug mode
-//static NSString *kETDebugAppID = @"ETDebugAppID";
-//static NSString *kETDebugAccessToken = @"ETDebugAccessToken";
-
-static NSString *kETProdAppID = @"ETProdAppID";
-static NSString *kETProdAccessToken = @"ETProdAccessToken";
 
 @interface BDAuthenticateData()
 
 @property (nonatomic, readwrite) NSString *pointApiKey;
-@property (nonatomic, readwrite) NSString *pointPackageName;
-@property (nonatomic, readwrite) NSString *pointUsername;
-
-@property (nonatomic, readwrite) NSString *etAppID;
-@property (nonatomic, readwrite) NSString *etAccessToken;
 
 @end
 
@@ -46,17 +32,6 @@ static NSString *kETProdAccessToken = @"ETProdAccessToken";
             NSBundle *mainBundle = [ NSBundle mainBundle ];
 
             shareInstance.pointApiKey = [ mainBundle objectForInfoDictionaryKey:kBDPointApiKey ];
-            shareInstance.pointPackageName = [ mainBundle objectForInfoDictionaryKey:kBDPointPackageName ];
-            shareInstance.pointUsername = [ mainBundle objectForInfoDictionaryKey:kBDPointUsername ];
-
-// Uncomment to test in Debug mode
-//#ifdef DEBUG
-//            shareInstance.etAppID = [mainBundle objectForInfoDictionaryKey:kETDebugAppID];
-//            shareInstance.etAccessToken = [mainBundle objectForInfoDictionaryKey:kETDebugAccessToken];
-//#else
-            shareInstance.etAppID = [mainBundle objectForInfoDictionaryKey:kETProdAppID];
-            shareInstance.etAccessToken = [mainBundle objectForInfoDictionaryKey:kETProdAccessToken];
-//#endif
         };
         
         if( NSThread.currentThread.isMainThread )

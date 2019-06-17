@@ -82,10 +82,10 @@ static NSString *urlString = @"https://api.bluedotinnovation.com/1/salesforce/ev
         
         if ( isOK )
         {
-            if ( [ _delegate respondsToSelector:@selector(reportSuccessful) ] )
+            if ( [ self->_delegate respondsToSelector:@selector(reportSuccessful) ] )
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [_delegate reportSuccessful];
+                    [self->_delegate reportSuccessful];
                 });
             }
         }
@@ -101,10 +101,10 @@ static NSString *urlString = @"https://api.bluedotinnovation.com/1/salesforce/ev
                                                                   code:statusCode
                                                               userInfo:@{NSLocalizedDescriptionKey:errorMessage}];
             
-            if ( responseError && [ _delegate respondsToSelector:@selector(reportFailedWithError:) ] )
+            if ( responseError && [ self->_delegate respondsToSelector:@selector(reportFailedWithError:) ] )
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [ _delegate reportFailedWithError:responseError ];
+                    [ self->_delegate reportFailedWithError:responseError ];
                 });
             }
         }

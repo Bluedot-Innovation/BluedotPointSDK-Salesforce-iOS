@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BDPIntegrationManagerDelegate.h"
+@import BDPointSDK;
 
 typedef enum : NSUInteger {
     AuthenticationStatusNotAuthenticated,
@@ -25,6 +26,6 @@ typedef enum : NSUInteger {
 
 - (void)authenticateMarketingCloudSDK;
 
-- (void)authenticateBDPoint;
+- (void)authenticateBDPointWithAuthorization:(BDAuthorizationLevel)authorization;
 
 @end
