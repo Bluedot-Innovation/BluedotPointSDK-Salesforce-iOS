@@ -25,13 +25,13 @@
 
 /**
  *  Report check-in event for given zone.
- *  @param BDZoneEvent event containing information of given zone
+ *  @param zoneEvent event containing information of given zone
  */
 - (void)reportCheckInWithBDZoneEvent:(BDZoneEvent *) zoneEvent;
 
 /**
  *  Report check-out event for given zone.
- *  @param BDZoneEvent event containing information of given zone
+ *  @param zoneEvent event containing information of given zone
  */
 - (void)reportCheckOutWithBDZoneEvent:(BDZoneEvent *) zoneEvent;
 
