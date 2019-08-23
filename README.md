@@ -1,3 +1,5 @@
+⚠️This library is deprecated. Please follow instructions here: https://docs.bluedot.io/salesforce-integration/mobile-sdk-integration/salesforce-ios-integration/ ⚠️
+
 ## Salesforce Marketing Cloud SDK Integration Guide
 ------
 ### Overview
